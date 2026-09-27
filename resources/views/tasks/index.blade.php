@@ -3,23 +3,77 @@
 <head>
     <title>Task Manager</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f4; }
-        h1 { color: #333; }
-        table { width: 100%; border-collapse: collapse; background: white; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        th { background: #333; color: white; }
-        .btn { padding: 5px 10px; text-decoration: none; border-radius: 4px; color: white; margin-right: 5px; border: none; cursor: pointer; }
-        .btn-add { background: #28a745; }
-        .btn-edit { background: #007bff; }
-        .btn-delete { background: #dc3545; }
-        .btn-status { background: #ffc107; color: black; }
-        .success { color: green; margin-top: 10px; }
-        .status-pending { color: orange; font-weight: bold; }
-        .status-completed { color: green; font-weight: bold; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            padding: 40px;
+            background-color: #050a14;
+            background-image:
+                repeating-linear-gradient(60deg, rgba(0,200,255,0.04) 0, rgba(0,200,255,0.04) 1px, transparent 1px, transparent 60px),
+                repeating-linear-gradient(-60deg, rgba(0,200,255,0.04) 0, rgba(0,200,255,0.04) 1px, transparent 1px, transparent 60px),
+                repeating-linear-gradient(0deg, rgba(0,200,255,0.04) 0, rgba(0,200,255,0.04) 1px, transparent 1px, transparent 60px);
+            color: #d6f6ff;
+        }
+        h1 {
+            color: #00e5ff;
+            text-shadow: 0 0 8px #00e5ff, 0 0 20px rgba(0,229,255,0.5);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 28px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(10, 20, 35, 0.85);
+            border: 1px solid #00e5ff44;
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.15);
+        }
+        th, td {
+            border: 1px solid #0f2a3d;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #04182b;
+            color: #00e5ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 13px;
+        }
+        tr:hover td { background: rgba(0, 229, 255, 0.05); }
+        .btn {
+            padding: 8px 14px;
+            text-decoration: none;
+            border-radius: 4px;
+            color: #05121e;
+            margin-right: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn-add { background: #00e5ff; box-shadow: 0 0 10px #00e5ff; }
+        .btn-edit { background: #ffb300; box-shadow: 0 0 10px #ffb300; }
+        .btn-delete { background: #ff3b5c; box-shadow: 0 0 10px #ff3b5c; }
+        .btn-status { background: #7dff8a; box-shadow: 0 0 10px #7dff8a; }
+        .success {
+            color: #7dff8a;
+            margin-top: 10px;
+            text-shadow: 0 0 6px #7dff8a;
+        }
+        .status-pending { color: #ffb300; font-weight: bold; text-shadow: 0 0 6px #ffb300; }
+        .status-completed { color: #7dff8a; font-weight: bold; text-shadow: 0 0 6px #7dff8a; }
     </style>
 </head>
 <body>
-    <h1>Personal Task Manager</h1>
+    <h1>⚡ Personal Task Manager</h1>
 
     @if(session('success'))
         <p class="success">{{ session('success') }}</p>
@@ -47,7 +101,7 @@
                 <form action="{{ route('tasks.status', $task) }}" method="POST" style="display:inline">
                     @csrf
                     @method('PATCH')
-                    <button type="submit" class="btn btn-status">Toggle Status</button>
+                    <button type="submit" class="btn btn-status">Toggle</button>
                 </form>
 
                 <form action="{{ route('tasks.destroy', $task) }}" method="POST" style="display:inline">
